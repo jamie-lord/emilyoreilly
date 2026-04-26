@@ -9,28 +9,24 @@ layout: default
   <p class="page-lede">{{ page.lede }}</p>
 
   <div class="contact-grid">
-    <form class="contact-form" action="https://formspree.io/f/{{ site.formspree_id | default: 'xpzvaayb' }}" method="POST">
-      <p class="muted" style="margin: 0 0 24px; font-family: var(--font-serif); font-style: italic; font-size: 16px;">
-        Quickest reply: drop me an email at <a class="text-link" href="mailto:{{ site.studio.email }}">{{ site.studio.email }}</a> with a photograph of the piece if you have one. Or use the form below.
+    <div>
+      <p class="contact-lead">
+        The quickest way to reach me is by email. A few sentences about your piece is enough to start &mdash; and a photograph in good light, if you have one, is even better.
       </p>
-      <label class="field">
-        <span class="field__label">Your name</span>
-        <input type="text" name="name" required autocomplete="name">
-      </label>
-      <label class="field">
-        <span class="field__label">Email</span>
-        <input type="email" name="email" required autocomplete="email">
-      </label>
-      <label class="field">
-        <span class="field__label">About your piece</span>
-        <textarea name="message" rows="6" required placeholder="A small watercolour from my grandmother — there are reddish spots across the sky."></textarea>
-      </label>
-      <input type="hidden" name="_subject" value="Enquiry from emilyoreilly.co.uk">
-      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-      <div style="margin-top: 8px;">
-        <button class="btn" type="submit">Send enquiry &nbsp;&rarr;</button>
+
+      <p style="margin-top: 32px;">
+        <a class="btn" href="mailto:{{ site.studio.email }}?subject=Paper%20conservation%20enquiry">
+          Email {{ site.studio.email }} &nbsp;&rarr;
+        </a>
+      </p>
+
+      <div class="prose" style="margin-top: 64px;">
+        <h3>A little more</h3>
+        <p>I&rsquo;m happy to work anywhere in the UK and can arrange transport should you need it. Recently, clients have also been posting items to the studio. I do not usually charge for quotes, and I&rsquo;m happy to work on-site for institutions.</p>
+        <p>If you can email a photograph of the work along with its dimensions, I should be able to give you a rough estimate of what I could do and how much it might cost.</p>
+        <p>The studio is in Barry, a short distance from Cardiff in South Wales, and is visited by appointment.</p>
       </div>
-    </form>
+    </div>
 
     <aside>
       <div class="eyebrow" style="margin-bottom: 14px;">By appointment</div>
@@ -49,11 +45,5 @@ layout: default
         {% include accreditation.html %}
       </div>
     </aside>
-  </div>
-
-  <div class="prose" style="margin-top: 64px; max-width: none;">
-    <h3 style="font-family: var(--font-display); font-size: 28px; font-weight: 400; margin-bottom: 14px;">A little more</h3>
-    <p>I'm happy to work anywhere in the UK and can arrange transport should you require it. Recent clients have also posted items to the studio. I do not usually charge for quotes, and I'm happy to work on-site for institutions.</p>
-    <p>If you can email a photograph of the work along with its dimensions, I should be able to give you a rough estimate of what I could do and how much it might cost.</p>
   </div>
 </section>

@@ -771,6 +771,15 @@ figure { margin: 0; }
   border-left: 1px solid var(--rule);
   padding-left: 48px;
 }
+.contact-lead {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--ink-1);
+  margin: 0;
+  max-width: 36ch;
+}
 .contact-aside__lede {
   font-family: var(--font-serif);
   font-style: italic;
