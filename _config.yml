@@ -5,6 +5,11 @@ description: >-
   and photographs, for private clients and public collections.
 author: "Emily O'Reilly"
 email: emily@emilyoreilly.co.uk
+# url + baseurl are overridden at build time by .github/workflows/jekyll.yml
+# using the outputs of actions/configure-pages, so the same config builds
+# correctly at jamie-lord.github.io/emilyoreilly (preview) and, once DNS
+# is cut over and dns/CNAME is moved back to repo root, at
+# https://emilyoreilly.co.uk (production).
 url: "https://emilyoreilly.co.uk"
 baseurl: ""
 lang: en-GB

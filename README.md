@@ -13,22 +13,55 @@ bundle exec jekyll serve
 
 ## Deployment
 
-`main` is deployed automatically by `.github/workflows/jekyll.yml`. The
-`CNAME` file pins the custom domain to `emilyoreilly.co.uk`.
+`main` is deployed automatically by `.github/workflows/jekyll.yml`.
 
-After enabling GitHub Pages on this repo, point DNS at GitHub:
+### Phase 1 — preview at github.io (current)
+
+Push `main`, then in the repo's **Settings → Pages**, set the build
+source to **GitHub Actions**. The site will publish to:
 
 ```
-A    emilyoreilly.co.uk     185.199.108.153
-A    emilyoreilly.co.uk     185.199.109.153
-A    emilyoreilly.co.uk     185.199.110.153
-A    emilyoreilly.co.uk     185.199.111.153
-AAAA emilyoreilly.co.uk     2606:50c0:8000::153
-AAAA emilyoreilly.co.uk     2606:50c0:8001::153
-AAAA emilyoreilly.co.uk     2606:50c0:8002::153
-AAAA emilyoreilly.co.uk     2606:50c0:8003::153
-CNAME www.emilyoreilly.co.uk emilyoreilly.co.uk.   ; or the user/org page
+https://jamie-lord.github.io/emilyoreilly/
 ```
+
+The workflow auto-detects the URL and base path from
+`actions/configure-pages` and overrides `site.url` / `site.baseurl` for
+the build, so all internal links and the SEO meta-tags resolve against
+the github.io URL.
+
+The custom-domain `CNAME` file is intentionally parked at `dns/CNAME`
+during this phase. While it sits there it's a record of the desired
+domain, but GitHub Pages doesn't see it — so the github.io URL serves
+the site directly instead of 302-ing to a not-yet-resolving DNS name.
+
+### Phase 2 — cut over to emilyoreilly.co.uk
+
+When you're happy with the preview:
+
+1. Point DNS at GitHub:
+   ```
+   A    emilyoreilly.co.uk     185.199.108.153
+   A    emilyoreilly.co.uk     185.199.109.153
+   A    emilyoreilly.co.uk     185.199.110.153
+   A    emilyoreilly.co.uk     185.199.111.153
+   AAAA emilyoreilly.co.uk     2606:50c0:8000::153
+   AAAA emilyoreilly.co.uk     2606:50c0:8001::153
+   AAAA emilyoreilly.co.uk     2606:50c0:8002::153
+   AAAA emilyoreilly.co.uk     2606:50c0:8003::153
+   CNAME www.emilyoreilly.co.uk jamie-lord.github.io.
+   ```
+
+2. Move the CNAME file back to the repo root and commit:
+   ```sh
+   git mv dns/CNAME CNAME
+   git commit -m "Cut over to emilyoreilly.co.uk"
+   git push
+   ```
+
+3. In **Settings → Pages**, GitHub will pick up the CNAME and offer to
+   enforce HTTPS — wait until the cert provisions, then enable it.
+
+After that, the github.io URL will 302 to the custom domain.
 
 ## URL parity with the WordPress site
 

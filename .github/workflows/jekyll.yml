@@ -31,8 +31,16 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build site
+        # Override site.url and site.baseurl from actions/configure-pages
+        # outputs so the same repo serves correctly at jamie-lord.github.io/<repo>
+        # (preview) and at the custom domain (once dns/CNAME is moved back to
+        # repo root and DNS is pointed at GitHub Pages).
         run: |
-          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+          cat > _config.pages.yml <<EOF
+          url: "${{ steps.pages.outputs.origin }}"
+          baseurl: "${{ steps.pages.outputs.base_path }}"
+          EOF
+          bundle exec jekyll build --config "_config.yml,_config.pages.yml"
         env:
           JEKYLL_ENV: production
 
