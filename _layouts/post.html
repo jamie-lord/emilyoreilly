@@ -1,0 +1,53 @@
+---
+layout: default
+---
+{%- capture post_trail -%}Home,Blog,{{ page.title }}{%- endcapture -%}
+{% include breadcrumb.html trail=post_trail %}
+
+<header class="post-header">
+  <p class="eyebrow">From the studio</p>
+  <h1 class="post-header__title">{{ page.title }}</h1>
+  <div class="post-header__meta">
+    <span>{{ page.date | date: "%-d %B %Y" }}</span>
+    {%- if page.categories.size > 0 -%}
+      <span>
+        {%- for c in page.categories -%}
+          {{ c | replace: '-', ' ' | capitalize }}{% unless forloop.last %}, {% endunless -%}
+        {%- endfor -%}
+      </span>
+    {%- endif -%}
+  </div>
+  {%- if page.lede -%}<p class="post-header__lede">{{ page.lede }}</p>{%- endif -%}
+</header>
+
+<article class="post-body prose">
+  {{ content }}
+
+  {%- if page.tags.size > 0 -%}
+    <div class="post-tags">
+      {%- for t in page.tags -%}
+        <span class="tag">#{{ t | replace: '-', ' ' }}</span>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</article>
+
+<section class="section section--bordered">
+  <p class="eyebrow">Continue reading</p>
+  <div class="two-col">
+    <div></div>
+    <div>
+      {%- assign current_id = page.id -%}
+      {%- assign others = site.posts | where_exp: "p", "p.id != current_id" | slice: 0, 4 -%}
+      {%- for p in others -%}
+        <a class="blog-card" href="{{ p.url | relative_url }}">
+          <div class="blog-card__date">{{ p.date | date: "%d %b %Y" }}</div>
+          <div>
+            <h3 class="blog-card__title">{{ p.title }}</h3>
+            {%- if p.excerpt -%}<p class="blog-card__excerpt">{{ p.excerpt | strip_html | truncate: 180 }}</p>{%- endif -%}
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

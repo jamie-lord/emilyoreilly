@@ -1,0 +1,92 @@
+title: "Emily O'Reilly ACR"
+tagline: "Paper conservation studio · Wales"
+description: >-
+  Accredited paper conservator working on prints, drawings, watercolours
+  and photographs, for private clients and public collections.
+author: "Emily O'Reilly"
+email: emily@emilyoreilly.co.uk
+url: "https://emilyoreilly.co.uk"
+baseurl: ""
+lang: en-GB
+timezone: Europe/London
+
+# Permalinks match the WordPress structure exactly so existing inbound
+# links and search-engine results continue to resolve unchanged.
+permalink: /:year/:month/:day/:title/
+
+# Pretty URLs everywhere — pages live at /<slug>/
+include:
+  - .well-known
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
+  - README.md
+  - ui_kits
+  - "*.xml"
+  - "emilyo039reillyacr.WordPress.*"
+  - .DS_Store
+  - "**/.DS_Store"
+
+keep_files:
+  - wp-content
+
+# Markdown
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+
+# Collections — none for now; posts live in _posts/
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: page
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+# Plugins
+plugins:
+  - jekyll-redirect-from
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+feed:
+  path: feed/index.xml
+
+# SEO defaults
+twitter:
+  username: EmilyOConserve
+social:
+  name: "Emily O'Reilly ACR"
+  links:
+    - https://www.facebook.com/emilyoconserve
+    - https://twitter.com/EmilyOConserve
+    - https://www.instagram.com/emilyoconserve/
+    - https://youtube.com/channel/UCWIg-lOqWKvj60KCRc_6c4Q
+
+# Owner contact / accreditation strings used across the site
+studio:
+  email: emily@emilyoreilly.co.uk
+  hours: "By appointment, Mon–Thu, 9.00–17.00"
+  location: "Wales, United Kingdom"
+  established: 2017
+
+# Top navigation order matches the existing WordPress menu.
+nav:
+  - { id: home,         label: Home,          url: "/" }
+  - { id: about,        label: About,         url: "/about-paper-conservator/" }
+  - { id: services,     label: Services,      url: "/conservation-services/" }
+  - { id: testimonials, label: Testimonials,  url: "/testimonials/" }
+  - { id: blog,         label: Blog,          url: "/blog/" }
+  - { id: faqs,         label: FAQs,          url: "/faqs/" }
+  - { id: contact,      label: Contact,       url: "/contact-conservator-conservation/", accent: true }

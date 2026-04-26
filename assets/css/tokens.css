@@ -1,0 +1,49 @@
+/*
+ * Design tokens — Emily O'Reilly ACR
+ * Reconstructed from the UI kit (ui_kits/website/*.jsx).
+ * Warm-paper palette, rust accent, archive teal, considered easings.
+ */
+
+:root {
+  /* Warm paper neutrals — "old paper" base */
+  --paper-0: #fbf7f0;   /* page background */
+  --paper-1: #f4ede1;   /* subtle band, frame inner */
+  --paper-2: #ece2cf;   /* deeper band */
+  --paper-3: #d8c8aa;   /* taupe placeholder mount */
+
+  /* Inks — warm, not pure black */
+  --ink-0: #1c1a17;     /* headings */
+  --ink-1: #2e2a24;     /* strong body */
+  --ink-2: #4a4339;     /* body */
+  --ink-3: #8a7e6c;     /* captions, eyebrows */
+  --ink-4: #c7baa3;     /* hairline, faint borders */
+
+  /* Accent — Prussian-leaning ink blue used on the ACR mark, links,
+     active nav state, button accents, and selection highlight. */
+  --accent-0: #23527a;
+  --accent-1: #1a3f5f;
+
+  /* Archive teal — used on Icon Accredited Member badge */
+  --archive-0: #2e4a47;
+
+  /* Hairlines */
+  --rule: rgba(28, 26, 23, 0.10);
+
+  /* Type families */
+  --font-display: "EB Garamond", "Garamond", "Adobe Garamond Pro", Georgia, serif;
+  --font-serif:   "EB Garamond", "Garamond", "Adobe Garamond Pro", Georgia, serif;
+  --font-sans:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Easings */
+  --ease-considered: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft:       cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout */
+  --measure-max: 1280px;
+  --gutter: 32px;
+}
+
+@media (max-width: 720px) {
+  :root { --gutter: 24px; }
+}

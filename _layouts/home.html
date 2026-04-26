@@ -1,0 +1,101 @@
+---
+layout: default
+---
+<section class="hero">
+  <p class="eyebrow hero__eyebrow">{{ page.eyebrow }}</p>
+  <h1 class="hero__title">Caring for paper, with patience.</h1>
+  <p class="hero__lede">{{ page.lede }}</p>
+
+  <div class="hero__ctas">
+    <a class="btn" href="{{ '/contact-conservator-conservation/' | relative_url }}">Discuss your piece &nbsp;&rarr;</a>
+    <a class="btn btn--secondary" href="{{ '/conservation-services/' | relative_url }}">See conservation services</a>
+  </div>
+
+  <div class="hero__pair">
+    {% include specimen.html
+      src="/wp-content/uploads/2021/11/P1130557-1024x687.jpg"
+      alt="Emily at the studio bench"
+      label="At the bench — the studio in north light"
+      aspect="3 / 4" %}
+    {% include specimen.html
+      src="/wp-content/uploads/2017/07/NMWA-25584-Piper-close-up.jpg"
+      alt="A 19th-century watercolour, mid-treatment"
+      label="A 19th-century watercolour, mid-treatment"
+      aspect="3 / 4" %}
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="two-col">
+    <div class="eyebrow" style="margin-top: 6px;">The studio</div>
+    <div>
+      <p class="studio-pull">
+        Conservation is about caring for clients' treasures &mdash; from National Trust collections to a single watercolour your grandmother left you.
+      </p>
+      <p class="studio-body">
+        I'm Emily O'Reilly. With over 25 years of experience working with paper, I've an understanding of large collections of international importance &mdash; from National collections to individual items of great sentimental value held by private clients. I'm an Accredited Conservator and a Fellow of the International Institute of Conservation: skills and knowledge assessed by fellow professionals as expert.
+      </p>
+      <p style="margin-top: 16px;">
+        <a class="text-link" href="{{ '/about-paper-conservator/' | relative_url }}">More about Emily &nbsp;&rarr;</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section--alt">
+  <div class="section">
+    <p class="eyebrow">Recent work</p>
+    <h2 class="section-title">A few pieces from the bench.</h2>
+
+    <div class="recent-grid">
+      {% include specimen.html
+        src="/wp-content/uploads/2017/07/Mount-burn.jpg"
+        alt="Mount burn from acidic mountboard"
+        label="Mount burn — acidic mountboard reduced"
+        aspect="4 / 5" %}
+      {% include specimen.html
+        src="/wp-content/uploads/2017/07/mould-500.jpg"
+        alt="Watercolour, mould reduced"
+        label="Watercolour, mould reduced after treatment"
+        aspect="4 / 5" %}
+      {% include specimen.html
+        src="/wp-content/uploads/2017/07/Foxing-500.jpg"
+        alt="Foxing reduced after washing"
+        label="Foxing reduced after washing"
+        aspect="4 / 5" %}
+    </div>
+    <div style="margin-top: 40px;">
+      <a class="text-link" href="{{ '/conservation-services/' | relative_url }}">See all conservation services &nbsp;&rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  {% include testimonial.html
+    quote="One fateful morning I came downstairs to find water pouring down an inside wall. Emily worked her magic and saved all eight watercolours that were priceless to our family. Her work is amazing."
+    name="Pauline Richards"
+    role="private client, South Wales" %}
+  <div style="margin-top: 32px;">
+    <a class="text-link" href="{{ '/testimonials/' | relative_url }}">Read more from clients &nbsp;&rarr;</a>
+  </div>
+</section>
+
+<section class="section section--bordered">
+  <p class="eyebrow">From the studio</p>
+  <h2 class="section-title">Notes &amp; recent posts.</h2>
+  <div>
+    {%- assign latest = site.posts | slice: 0, 4 -%}
+    {%- for p in latest -%}
+      <a class="blog-card" href="{{ p.url | relative_url }}">
+        <div class="blog-card__date">{{ p.date | date: "%d %b %Y" }}</div>
+        <div>
+          <h3 class="blog-card__title">{{ p.title }}</h3>
+          <p class="blog-card__excerpt">{{ p.excerpt | strip_html | truncate: 180 }}</p>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+  <div style="margin-top: 32px;">
+    <a class="text-link" href="{{ '/blog/' | relative_url }}">All posts &nbsp;&rarr;</a>
+  </div>
+</section>

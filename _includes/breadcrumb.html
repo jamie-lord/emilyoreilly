@@ -1,0 +1,12 @@
+{%- comment -%} Render: trail = "Home,Conservation services" {%- endcomment -%}
+{%- assign parts = include.trail | split: "," -%}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  {%- for part in parts -%}
+    {%- if forloop.index > 1 -%}<span class="sep">&rsaquo;</span>{%- endif -%}
+    {%- if forloop.last -%}
+      <span class="current">{{ part | strip }}</span>
+    {%- else -%}
+      <a href="{{ '/' | relative_url }}">{{ part | strip }}</a>
+    {%- endif -%}
+  {%- endfor -%}
+</nav>

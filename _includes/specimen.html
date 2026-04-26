@@ -1,0 +1,23 @@
+{%- comment -%}
+  Reusable framed image. Params:
+    src    – image URL (use relative_url if local)
+    alt    – alt text
+    label  – caption beneath
+    aspect – CSS aspect-ratio (default 4/3)
+    bare   – truthy → no frame
+{%- endcomment -%}
+{%- assign aspect = include.aspect | default: "4 / 3" -%}
+{%- assign frame_class = "specimen__frame" -%}
+{%- if include.bare -%}{% assign frame_class = "specimen__frame specimen__frame--bare" %}{%- endif -%}
+<figure class="specimen">
+  <div class="{{ frame_class }}">
+    {%- if include.src -%}
+      <img class="specimen__media" src="{{ include.src }}" alt="{{ include.alt | default: '' | escape }}" style="aspect-ratio: {{ aspect }};" loading="lazy">
+    {%- else -%}
+      <div class="specimen__media specimen__media--placeholder" style="aspect-ratio: {{ aspect }};">{{ include.alt | default: 'photograph' }}</div>
+    {%- endif -%}
+  </div>
+  {%- if include.label -%}
+    <figcaption class="specimen__caption">{{ include.label }}</figcaption>
+  {%- endif -%}
+</figure>

@@ -1,0 +1,6 @@
+{%- assign size = include.size | default: "md" -%}
+{%- assign light = include.light | default: false -%}
+<span class="wordmark wordmark--{{ size }}{% if light %} wordmark--light{% endif %}">
+  <span class="name">Emily O&rsquo;Reilly</span>
+  <span class="acr">ACR</span>
+</span>

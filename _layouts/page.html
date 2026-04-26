@@ -1,0 +1,18 @@
+---
+layout: default
+---
+{%- if page.breadcrumb -%}
+  {% include breadcrumb.html trail=page.breadcrumb %}
+{%- endif -%}
+
+<section class="section">
+  {%- if page.eyebrow -%}<p class="eyebrow">{{ page.eyebrow }}</p>{%- endif -%}
+  {%- if page.title and page.show_title != false -%}
+    <h1 class="page-title">{{ page.title }}</h1>
+  {%- endif -%}
+  {%- if page.lede -%}<p class="page-lede">{{ page.lede }}</p>{%- endif -%}
+
+  <div class="prose prose--wide">
+    {{ content }}
+  </div>
+</section>

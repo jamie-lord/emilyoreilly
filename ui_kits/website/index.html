@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emily O'Reilly ACR — Paper Conservation</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body { background: var(--paper-0); }
+  .breadcrumb {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+    padding: 24px 32px 0;
+    max-width: 1280px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .breadcrumb a { color: var(--ink-3); border: 0; }
+  .breadcrumb .sep { color: var(--ink-4); padding: 0 6px; }
+  .breadcrumb .current { color: var(--ink-1); }
+  .page-section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 80px 32px;
+  }
+  .page-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 18px;
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink-0);
+    font-weight: 400;
+    margin: 0 0 28px;
+    max-width: 14ch;
+    text-wrap: balance;
+  }
+  .page-lede {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 52ch;
+    margin: 0 0 56px;
+  }
+  .body-prose p {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    max-width: 64ch;
+    margin: 0 0 18px;
+  }
+  .body-prose h3 {
+    font-family: var(--font-display);
+    font-size: 32px;
+    line-height: 1.15;
+    color: var(--ink-0);
+    margin: 48px 0 16px;
+    font-weight: 400;
+    letter-spacing: -0.012em;
+  }
+  @media (max-width: 720px) {
+    .page-section { padding: 56px 24px; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="Wordmark.jsx"></script>
+<script type="text/babel" src="Nav.jsx"></script>
+<script type="text/babel" src="SpecimenPair.jsx"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="ServiceBlock.jsx"></script>
+<script type="text/babel" src="Testimonial.jsx"></script>
+<script type="text/babel" src="BlogCard.jsx"></script>
+<script type="text/babel" src="AccreditationStrip.jsx"></script>
+<script type="text/babel" src="Footer.jsx"></script>
+<script type="text/babel" src="Button.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+const useState = React.useState;
+
+function Breadcrumb({ trail }) {
+  if (!trail || trail.length === 0) return null;
+  return (
+    <div className="breadcrumb">
+      {trail.map((item, i) => (
+        <React.Fragment key={i}>
+          {i > 0 && <span className="sep">›</span>}
+          <span className={i === trail.length - 1 ? 'current' : ''}>{item}</span>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
+// ---------- HOME ----------
+function HomePage({ onNavigate }) {
+  return (
+    <main data-screen-label="Home">
+      <Hero onPrimary={() => onNavigate('contact')} />
+
+      {/* Intro paragraph from existing site */}
+      <section className="page-section" style={{ paddingTop: 0 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '160px 1fr', gap: 48 }}>
+          <div className="page-eyebrow" style={{ marginTop: 6 }}>The studio</div>
+          <div>
+            <p style={{
+              fontFamily: 'var(--font-serif)',
+              fontStyle: 'italic',
+              fontSize: 28,
+              lineHeight: 1.4,
+              color: 'var(--ink-0)',
+              maxWidth: '36ch',
+              fontWeight: 400,
+              margin: 0,
+              textWrap: 'balance',
+            }}>
+              Conservation is about caring for clients' treasures — from National Trust collections to a
+              single watercolour your grandmother left you.
+            </p>
+            <p style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: 17,
+              lineHeight: 1.7,
+              color: 'var(--ink-2)',
+              maxWidth: '60ch',
+              marginTop: 32,
+            }}>
+              I'm Emily O'Reilly. I've worked with paper for over twenty-five years, in private studios and as
+              a senior conservator in public institutions in the UK and Australia. I set up this studio in
+              2017. If you have a piece of paper that needs caring for, I can almost certainly help &mdash; or tell
+              you who can.
+            </p>
+            <a onClick={(e) => { e.preventDefault(); onNavigate('about'); }} href="#about" style={{
+              display: 'inline-block',
+              marginTop: 16,
+              color: 'var(--rust-0)',
+              borderBottom: '1px solid var(--rust-0)',
+              fontFamily: 'var(--font-sans)',
+              fontSize: 14,
+              paddingBottom: 2,
+            }}>More about Emily &nbsp;→</a>
+          </div>
+        </div>
+      </section>
+
+      {/* Recent work — three specimen tiles */}
+      <section style={{ background: 'var(--paper-1)', borderTop: '1px solid var(--rule)', borderBottom: '1px solid var(--rule)' }}>
+        <div className="page-section">
+          <div className="page-eyebrow">Recent work</div>
+          <h2 style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 56,
+            lineHeight: 1.05,
+            letterSpacing: '-0.02em',
+            color: 'var(--ink-0)',
+            fontWeight: 400,
+            margin: '0 0 56px',
+            maxWidth: '14ch',
+            textWrap: 'balance',
+          }}>A few pieces from the bench.</h2>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }}>
+            <Specimen aspect="4/5" alt="Sellotape removal" label="Sellotape adhesive removal — 2023" />
+            <Specimen aspect="4/5" alt="Mould treatment" label="Watercolour, mould reduced — 2022" />
+            <Specimen aspect="4/5" alt="Map repair" label="Estate map, repaired & washed — 2021" />
+          </div>
+          <div style={{ marginTop: 40 }}>
+            <a onClick={(e) => { e.preventDefault(); onNavigate('services'); }} href="#services" style={{
+              color: 'var(--rust-0)', borderBottom: '1px solid var(--rust-0)',
+              fontFamily: 'var(--font-sans)', fontSize: 14, paddingBottom: 2,
+            }}>See all conservation services &nbsp;→</a>
+          </div>
+        </div>
+      </section>
+
+      {/* Quote */}
+      <section className="page-section">
+        <Testimonial
+          quote={"She returned a piece my grandfather had drawn in 1947 — it now looks the way I remember it as a child."}
+          name="Hannah Lewis"
+          role="private client, Carmarthen"
+        />
+      </section>
+    </main>
+  );
+}
+
+// ---------- ABOUT ----------
+function AboutPage() {
+  return (
+    <main data-screen-label="About">
+      <Breadcrumb trail={['Home', 'About']} />
+      <section className="page-section">
+        <div className="page-eyebrow">About</div>
+        <h1 className="page-title">What makes a paper conservator?</h1>
+        <p className="page-lede">
+          The ideal combination of art, science, and craft &mdash; and the patience to question why a piece looks
+          the way it does, before changing it forever.
+        </p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 64, alignItems: 'flex-start' }}>
+          <Specimen aspect="4/5" alt="Emily at the studio" label="Emily, at the studio bench" frame={true} />
+          <div className="body-prose">
+            <h3>Biography</h3>
+            <p>
+              I graduated from Camberwell College of Art with a BA(Hons) Paper Conservation in 1995. Since
+              then I've worked in a private conservation studio and as a senior paper conservator in public
+              institutions in the UK and Australia. I set up my own studio in 2017.
+            </p>
+            <p>
+              Ever since I was at school I always wanted to be a conservator. I loved creating my own art but
+              always enjoyed science as well as art history and visiting art galleries. Conservation is the
+              ideal combination of the three. You need to be dexterous and have good craft skills. You need
+              to understand the technical aspects of an art work &mdash; how it was made and with what &mdash; and a
+              basic understanding of chemistry is also important for understanding what treatments will work.
+            </p>
+            <p>
+              What I've also come to learn is that you need to be sensitive to an art work when conserving
+              it: question why it looks the way it does, understand its existence before jumping in and
+              changing it forever.
+            </p>
+
+            <h3>What is an ACR?</h3>
+            <p>
+              Using an Accredited Conservator-Restorer is crucial. In the UK it is a sign that someone has
+              been assessed and found to be an expert in their area of specialisation. You can read more on
+              the <a href="#">Conservation Register</a>.
+            </p>
+
+            <div style={{ marginTop: 32 }}>
+              <AccreditationStrip />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Publications */}
+      <section style={{ borderTop: '1px solid var(--rule)' }}>
+        <div className="page-section">
+          <div className="page-eyebrow">Publications</div>
+          <h2 style={{
+            fontFamily: 'var(--font-display)', fontWeight: 400,
+            fontSize: 48, lineHeight: 1.1, letterSpacing: '-0.02em',
+            color: 'var(--ink-0)', margin: '0 0 40px', maxWidth: '20ch',
+          }}>Research presented at international conferences.</h2>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, maxWidth: 800 }}>
+            {[
+              { year: '2016', body: <><strong>IIC Congress LA 2016.</strong> Co-authored (with Judit Bodor and Rose Miller) and presented <em>Curation, conservation and the artist in 'Silent Explosion: Ivor Davies and Destruction in Art'</em>.</> },
+              { year: '2015', body: <><strong>XIII IADA Congress, Berlin.</strong> New research into a phenomenon identified on a 19th-century watercolour.</> },
+              { year: '2011', body: <><strong>Conservation Matters in Wales, Aberystwyth.</strong> Research into the Thomas Hornor albums of the Neath Valley.</> },
+              { year: '2010', body: <><strong>ICOM-CC photographic materials group, Athens.</strong> Research on contemporary art photography.</> },
+              { year: '2009', body: <><strong>AIC, Los Angeles.</strong> <em>Place in Wales</em> &mdash; research on drawings of Wales by Francis Place, dated 1678.</> },
+            ].map((item) => (
+              <li key={item.year} style={{
+                display: 'grid', gridTemplateColumns: '90px 1fr', gap: 32,
+                padding: '20px 0', borderTop: '1px solid var(--rule)',
+              }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--ink-3)', letterSpacing: '0.04em' }}>{item.year}</div>
+                <div style={{ fontFamily: 'var(--font-sans)', fontSize: 16, lineHeight: 1.6, color: 'var(--ink-2)', maxWidth: '70ch' }}>{item.body}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+// ---------- SERVICES ----------
+function ServicesPage() {
+  const services = [
+    { eyebrow: 'Framing', title: 'Correct framing is the most important thing you can do.', lede: 'A yellow-brown acidic mount can stain the work it touches — what conservators call "mount burn".', body: ['I can treat the paper to reduce the staining. But of course prevention is better than the cure: using best-quality conservation or museum mount board prevents this from happening in the first place.', 'Yellowing paper is a sign that the structure of the paper is deteriorating, and is disfiguring as well as life-shortening. It is possible for me to remove or reduce this yellowing.'], captionBefore: 'Map before washing', captionAfter: 'Map after washing' },
+    { eyebrow: 'Foxing', title: 'Foxing — those reddish-brown spots.', lede: 'Most foxing is caused by mould or fungal growth; sometimes by metal particles within the paper that have rusted.', body: ['Foxing is mainly disfiguring rather than dangerous, and it is not always easy to treat or remove. But I can usually reduce it enough to visually improve the art work.'], captionBefore: 'Watercolour with mould spores', captionAfter: 'Foxing reduced after treatment' },
+    { eyebrow: 'Tears & repairs', title: 'Physical damage of paper can be repaired.', lede: 'If paper is not handled carefully damage can occur. Damage can also occur due to biological agents.', body: ['Careful repairing from behind holds the paper together — and although not invisible, the repair is barely noticeable when the work is seen in a frame.'], captionBefore: 'Map before conservation', captionAfter: 'Map after conservation' },
+    { eyebrow: 'Conservation framing', title: 'Good framing is good preservation.', lede: 'We all want our art works presented in the best possible way to make them look good — but sometimes this compromises their preservation.', body: ['I will use the best quality mount boards, ensure the work is not touching the glass, and seal in the frame to prevent thunder flies (or thrips) from getting in.'], captionBefore: 'Thrips beneath glass', captionAfter: 'Properly sealed frame' },
+    { eyebrow: 'When things go wrong', title: 'Water and moisture are bad for paper.', lede: 'When art works get wet or damp, mould can flourish, disfigure, and cause severe damage.', body: ['It can be safely and completely removed if treated as soon as it starts. Not only is mould damaging — it is also extremely hazardous to health, so it needs to be done very carefully.'], captionBefore: 'Mould on the surface', captionAfter: 'After treatment' },
+    { eyebrow: 'Tape', title: 'Tape is evil!', lede: 'Pressure-sensitive tapes should never be used on paper. But unfortunately they are — by people thinking they are "fixing" a problem, or just using what is to hand.', body: ['The adhesive is the evil part. As it ages it dries out, stops sticking, and discolours or embrittles the paper. I can remove it, but cannot always completely remove the associated staining. I only use tested conservation tapes and adhesives to repair and hinge objects in frames — guaranteed.'], captionBefore: 'Old pressure-sensitive tape', captionAfter: 'After tape removal' },
+  ];
+
+  return (
+    <main data-screen-label="Services">
+      <Breadcrumb trail={['Home', 'Conservation services']} />
+      <section className="page-section" style={{ paddingBottom: 32 }}>
+        <div className="page-eyebrow">Conservation services</div>
+        <h1 className="page-title">What to look out for, and what I can do for you.</h1>
+        <p className="page-lede">
+          Paper has been made and used for hundreds of years, and examples survive that are many hundreds of
+          years old. There are different reasons why paper survives — or does not.
+        </p>
+      </section>
+
+      {services.map((s, i) => (
+        <ServiceBlock key={i} index={i + 1} {...s} alt={i % 2 === 1} />
+      ))}
+    </main>
+  );
+}
+
+// ---------- TESTIMONIALS ----------
+function TestimonialsPage() {
+  const items = [
+    { quote: 'She returned a piece my grandfather had drawn in 1947 — it now looks the way I remember it as a child.', name: 'Hannah Lewis', role: 'private client, Carmarthen' },
+    { quote: 'Calm, generous with explanation, and unhurried. The map looks itself again.', name: 'Mostyn Estate', role: 'estate archive' },
+    { quote: 'A pleasure to work with. The condition reports were as careful as the treatments.', name: 'National Trust', role: 'Mount Stewart project' },
+    { quote: 'Emily talked me through every option before touching a thing. That mattered.', name: 'David & Anwen Pritchard', role: 'private clients' },
+  ];
+  return (
+    <main data-screen-label="Testimonials">
+      <Breadcrumb trail={['Home', 'Testimonials']} />
+      <section className="page-section">
+        <div className="page-eyebrow">Testimonials</div>
+        <h1 className="page-title">In her clients' words.</h1>
+        <p className="page-lede">
+          Conservators are most often judged by other conservators. The voices that matter most to me, though,
+          are the people whose pieces I look after.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, marginTop: 24 }}>
+          {items.map((t, i) => <Testimonial key={i} {...t} />)}
+        </div>
+      </section>
+    </main>
+  );
+}
+
+// ---------- CONTACT ----------
+function ContactPage() {
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [sent, setSent] = useState(false);
+  return (
+    <main data-screen-label="Contact">
+      <Breadcrumb trail={['Home', 'Contact']} />
+      <section className="page-section">
+        <div className="page-eyebrow">Contact</div>
+        <h1 className="page-title">Tell me about your piece.</h1>
+        <p className="page-lede">
+          A line or two is enough to start. If you can attach a photograph in good light it helps me
+          understand what we're dealing with.
+        </p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 80, marginTop: 24 }}>
+          <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+            <Field label="Your name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} />
+            <Field label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} />
+            <Field label="About your piece" textarea value={form.message} onChange={(v) => setForm({ ...form, message: v })} placeholder="A small watercolour from my grandmother — there are reddish spots across the sky." />
+            <div style={{ marginTop: 8 }}>
+              <Button>{sent ? 'Sent — thank you' : <>Send enquiry &nbsp;→</>}</Button>
+            </div>
+            {sent && (
+              <div style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--ink-2)', fontSize: 16 }}>
+                Thank you — I'll come back to you within a few days. Emily.
+              </div>
+            )}
+          </form>
+
+          <aside style={{ borderLeft: '1px solid var(--rule)', paddingLeft: 48 }}>
+            <div className="page-eyebrow" style={{ marginBottom: 14 }}>By appointment</div>
+            <p style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: 22, lineHeight: 1.4, color: 'var(--ink-1)', margin: '0 0 24px', maxWidth: '28ch' }}>
+              The studio is north-light, quiet, and visited only by appointment.
+            </p>
+            <div style={{ fontFamily: 'var(--font-sans)', fontSize: 15, lineHeight: 1.8, color: 'var(--ink-2)' }}>
+              <a href="mailto:emily@emilyoreilly.co.uk" style={{ color: 'var(--rust-0)', borderBottom: '1px solid var(--rust-0)' }}>emily@emilyoreilly.co.uk</a>
+              <div style={{ marginTop: 6 }}>Mon&ndash;Thu, 9.00&ndash;17.00</div>
+              <div style={{ marginTop: 6, color: 'var(--ink-3)', fontSize: 13, fontStyle: 'italic', fontFamily: 'var(--font-serif)' }}>Wales, United Kingdom</div>
+            </div>
+            <div style={{ marginTop: 32 }}>
+              <AccreditationStrip />
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+// ---------- BLOG ----------
+function BlogPage() {
+  const posts = [
+    { date: '04 Jul 2023', title: 'Paper Conservation on YouTube', excerpt: 'A short guide to channels and series I return to often, and a few I show students.' },
+    { date: '30 Jun 2022', title: 'Part 2: The Conservation of the Naples Bed Hangings — Mount Stewart', excerpt: 'The second post on a long-running project for the National Trust in Northern Ireland.' },
+    { date: '10 Dec 2021', title: 'Part 1: The Conservation of the Naples Bed Hangings — Mount Stewart', excerpt: 'Beginning a project that took the better part of two years, with the bed hangings off-site.' },
+    { date: '07 Feb 2021', title: 'Looking after and conserving family documents', excerpt: 'A short, practical guide for anyone with a box of family papers in the loft.' },
+    { date: '22 Nov 2020', title: 'Conserving a Poster', excerpt: 'A printed poster from the 1970s, brittle and folded — the steps I took to stabilise it.' },
+    { date: '29 Mar 2020', title: 'Creases, folds, dents and seagulls', excerpt: 'A miscellany on small physical damage and one unexpected visitor to the studio.' },
+  ];
+  return (
+    <main data-screen-label="Blog">
+      <Breadcrumb trail={['Home', 'Blog']} />
+      <section className="page-section">
+        <div className="page-eyebrow">Blog</div>
+        <h1 className="page-title">Notes from the studio.</h1>
+        <p className="page-lede">
+          Long-form posts about specific projects, treatments, and the occasional thing I learn along the
+          way.
+        </p>
+        <div style={{ marginTop: 32 }}>
+          {posts.map((p, i) => <BlogCard key={i} {...p} />)}
+        </div>
+      </section>
+    </main>
+  );
+}
+
+// ---------- FAQs ----------
+function FaqsPage() {
+  const faqs = [
+    { q: 'How long does conservation usually take?', a: 'It depends on the work. A simple tape removal might take an afternoon; a complex multi-stage treatment, several weeks. I will always give you a written estimate before starting.' },
+    { q: 'Can you remove every stain?', a: 'No — and you should be sceptical of anyone who says they can. I can almost always reduce a stain visually, but full removal is sometimes impossible without compromising the paper.' },
+    { q: 'Do you take on framing as well as treatment?', a: 'Yes. Conservation framing — using museum-quality mount board, glazing, and sealed frames — is part of the service.' },
+    { q: 'Will you tell me if a piece is not worth treating?', a: 'Always. Where the cost of treatment exceeds the value (financial or sentimental) of the piece, I will say so plainly.' },
+    { q: 'Do you work with national institutions as well as private clients?', a: 'Yes. Past clients include the National Trust and a number of national collections. The same care goes into every piece.' },
+  ];
+  return (
+    <main data-screen-label="FAQs">
+      <Breadcrumb trail={['Home', 'FAQs']} />
+      <section className="page-section">
+        <div className="page-eyebrow">Frequently asked</div>
+        <h1 className="page-title">A few common questions.</h1>
+        <div style={{ marginTop: 56, maxWidth: 800 }}>
+          {faqs.map((f, i) => (
+            <details key={i} style={{
+              borderTop: '1px solid var(--rule)',
+              padding: '24px 0',
+            }}>
+              <summary style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 24,
+                lineHeight: 1.25,
+                color: 'var(--ink-0)',
+                cursor: 'pointer',
+                listStyle: 'none',
+                fontWeight: 400,
+              }}>{f.q}</summary>
+              <p style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 16,
+                lineHeight: 1.7,
+                color: 'var(--ink-2)',
+                marginTop: 16,
+                maxWidth: '64ch',
+              }}>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+}
+
+// ---------- ROOT ----------
+function App() {
+  const [page, setPage] = useState('home');
+  const navigate = (id) => {
+    setPage(id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const Page = {
+    home: HomePage,
+    about: AboutPage,
+    services: ServicesPage,
+    testimonials: TestimonialsPage,
+    blog: BlogPage,
+    faqs: FaqsPage,
+    contact: ContactPage,
+  }[page] || HomePage;
+
+  return (
+    <>
+      <Nav current={page} onNavigate={navigate} />
+      <Page onNavigate={navigate} />
+      <Footer onNavigate={navigate} />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__top">
+      <div>
+        {% include wordmark.html size="lg" %}
+        <p class="footer__lede">
+          Paper conservation by appointment. Studio in Wales &mdash; work undertaken nationally and for international collections.
+        </p>
+        <div style="margin-top: 24px;">
+          {% include accreditation.html %}
+        </div>
+      </div>
+
+      <div>
+        <div class="footer__heading">The studio</div>
+        <ul class="footer__list">
+          <li><a href="{{ '/about-paper-conservator/' | relative_url }}">About</a></li>
+          <li><a href="{{ '/conservation-services/' | relative_url }}">Conservation services</a></li>
+          <li><a href="{{ '/testimonials/' | relative_url }}">Testimonials</a></li>
+          <li><a href="{{ '/blog/' | relative_url }}">Blog</a></li>
+          <li><a href="{{ '/faqs/' | relative_url }}">FAQs</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__contact">
+        <div class="footer__heading">Get in touch</div>
+        <a href="mailto:{{ site.studio.email }}">{{ site.studio.email }}</a>
+        <div class="meta">{{ site.studio.hours }}</div>
+        <div class="loc">{{ site.studio.location }}</div>
+        <div class="footer__social">
+          <a href="https://www.facebook.com/emilyoconserve" rel="noopener" target="_blank">Facebook</a>
+          <a href="https://twitter.com/EmilyOConserve" rel="noopener" target="_blank">Twitter</a>
+          <a href="https://www.instagram.com/emilyoconserve/" rel="noopener" target="_blank">Instagram</a>
+          <a href="https://youtube.com/channel/UCWIg-lOqWKvj60KCRc_6c4Q" rel="noopener" target="_blank">YouTube</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} Emily O&rsquo;Reilly ACR</span>
+      <span class="colophon">Conservation is about caring for clients&rsquo; treasures.</span>
+    </div>
+  </div>
+</footer>

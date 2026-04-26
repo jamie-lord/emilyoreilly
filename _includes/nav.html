@@ -1,0 +1,38 @@
+<nav class="nav" id="site-nav" aria-label="Primary">
+  <div class="nav__inner">
+    <a class="nav__brand" href="{{ '/' | relative_url }}" aria-label="Emily O'Reilly ACR — home">
+      {% include wordmark.html size="md" %}
+    </a>
+    <button class="nav__toggle" type="button" aria-label="Menu" aria-controls="nav-items" aria-expanded="false">
+      <svg width="22" height="14" viewBox="0 0 22 14" aria-hidden="true">
+        <path d="M0 1h22M0 7h22M0 13h22" stroke="currentColor" stroke-width="1.4" fill="none"/>
+      </svg>
+    </button>
+    <div class="nav__items" id="nav-items">
+      {%- assign current = page.nav_id | default: "" -%}
+      {%- for item in site.nav -%}
+        {%- assign active_class = "" -%}
+        {%- if current == item.id -%}{% assign active_class = "is-active" %}{%- endif -%}
+        {%- if item.accent -%}{% assign active_class = active_class | append: " is-accent" %}{%- endif -%}
+        <a href="{{ item.url | relative_url }}" class="{{ active_class | strip }}">{{ item.label }}</a>
+      {%- endfor -%}
+    </div>
+  </div>
+</nav>
+
+<script>
+  (function () {
+    var nav = document.getElementById('site-nav');
+    var toggle = nav.querySelector('.nav__toggle');
+    function onScroll() {
+      if (window.scrollY > 16) nav.classList.add('is-scrolled');
+      else nav.classList.remove('is-scrolled');
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+  })();
+</script>
